@@ -61,7 +61,6 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 	[self addSubview:self.overlayView];
 }
 
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -156,6 +155,7 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 	// init ImageView frame and scrollView
 	[scrollView setContentSize:imageView.frame.size];
 	[self centeredFrameForScrollView:scrollView andUIView:imageView];
+	[self scrollViewDidScroll:scrollView];
 }
 
 
@@ -294,6 +294,10 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 
 
 #pragma mark - AGPhotoBrowserOverlayViewDelegate
+
+- (void)setShowsActionButton:(BOOL)showActionButton {
+	[[[self overlayView] actionButton] setHidden:!showActionButton];
+}
 
 - (void)sharingView:(AGPhotoBrowserOverlayView *)sharingView didTapOnActionButton:(UIButton *)actionButton
 {

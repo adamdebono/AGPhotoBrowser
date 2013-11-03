@@ -22,4 +22,6 @@
 - (void)showFromIndex:(NSInteger)initialIndex;
 - (void)hideWithCompletion:( void (^) (BOOL finished) )completionBlock;
 
+- (void)setShowsActionButton:(BOOL)showActionButton;
+
 @end
