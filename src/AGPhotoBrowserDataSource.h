@@ -12,8 +12,8 @@
 
 - (NSInteger)numberOfPhotosForPhotoBrowser:(AGPhotoBrowserView *)photoBrowser;
 - (UIImage *)photoBrowser:(AGPhotoBrowserView *)photoBrowser imageAtIndex:(NSInteger)index;
-
 @optional
+- (void)photoBrowser:(AGPhotoBrowserView *)photoBrowser loadImageAtIndex:(NSInteger)index inView:(UIImageView *)imageview andRunCompletion:(void (^)(UIImage *image))completion;
 
 - (NSString *)photoBrowser:(AGPhotoBrowserView *)photoBrowser titleForImageAtIndex:(NSInteger)index;
 - (NSString *)photoBrowser:(AGPhotoBrowserView *)photoBrowser descriptionForImageAtIndex:(NSInteger)index;

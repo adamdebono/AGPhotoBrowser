@@ -134,13 +134,22 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 	}
     
 	UIImageView *imageView = (UIImageView*) [scrollView viewWithTag:1];
-    imageView.image = [_dataSource photoBrowser:self imageAtIndex:indexPath.row];
-    imageView.frame = self.bounds;
-    
-    // init ImageView frame and scrollView
-    [scrollView setContentSize:imageView.frame.size];
-    [self centeredFrameForScrollView:scrollView andUIView:imageView];
-
+    UIImage *img = [_dataSource photoBrowser:self imageAtIndex:indexPath.row];
+	if (!img) {
+		if ([_dataSource respondsToSelector:@selector(photoBrowser:loadImageAtIndex:inView:andRunCompletion:)]) {
+			[_dataSource photoBrowser:self loadImageAtIndex:indexPath.row inView:imageView andRunCompletion:^(UIImage *image) {
+				[imageView setImage:image];
+			}];
+		}
+	} else {
+		[imageView setImage:img];
+	}
+	
+	imageView.frame = self.bounds;
+	
+	// init ImageView frame and scrollView
+	[scrollView setContentSize:imageView.frame.size];
+	[self centeredFrameForScrollView:scrollView andUIView:imageView];
 }
 
 
