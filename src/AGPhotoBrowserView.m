@@ -137,8 +137,14 @@ const int AGPhotoBrowserThresholdToCenter = 150;
     UIImage *img = [_dataSource photoBrowser:self imageAtIndex:indexPath.row];
 	if (!img) {
 		if ([_dataSource respondsToSelector:@selector(photoBrowser:loadImageAtIndex:inView:andRunCompletion:)]) {
+			UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+			[activityIndicator setCenter:cell.contentView.center];
+			[activityIndicator startAnimating];
+			[[cell contentView] addSubview:activityIndicator];
+			
 			[_dataSource photoBrowser:self loadImageAtIndex:indexPath.row inView:imageView andRunCompletion:^(UIImage *image) {
 				[imageView setImage:image];
+				[activityIndicator removeFromSuperview];
 			}];
 		}
 	} else {
